@@ -1,6 +1,96 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeppBamboo: Bauphasen im Sudan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+            color: #343a40;
+        }
+        .phase-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform: translateY(0);
+        }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <header class="text-center py-12 px-4">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4 tracking-tight">ZeppBamboo Bauphasen</h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Eine Vision der Nachhaltigkeit und Selbstversorgung im Sudan, Schritt für Schritt.<br>
+        <span class="font-semibold text-emerald-700">Euystacio Level: DeepAuraHarmony Stage!</span>
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Phase 1 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 1: Fundament und Auftrieb</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-13e2cbe6d7c" alt="Phase 1 - Fundamentbau mit Bambus und Plastikkanistern" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Ein Team von Bauenden errichtet die grundlegende Bambusgitterstruktur auf festem Boden nahe eines Gewässers. Recycelte Plastikkanister und Fässer, die vor Ort gesammelt wurden, werden sorgfältig in die Bambusrahmen eingearbeitet und verschnürt, um die Auftriebskörper zu bilden.</p>
+        </div>
+        <!-- Phase 2 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 2: Plattformmontage</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-14e2cbe6d7c" alt="Phase 2 - Montage der Grundstruktur auf dem Wasser" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Die schwimmende Plattform wird im Wasser positioniert und stabilisiert. Die vertikalen Bambusstützen und der Rahmen für die erste Ebene entstehen.</p>
+        </div>
+        <!-- Phase 3 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 3: Dachkonstruktion und Aquaponik</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-15e2cbe6d7c" alt="Phase 3 - Bau des Daches und Aquaponik-Systeme" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Die Bambusrahmen sind weitgehend fertiggestellt, Dächer aus Schilf werden montiert, und erste Aquaponik-Systeme (Pflanzbeete & Fischzucht) entstehen.</p>
+        </div>
+        <!-- Phase 4 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 4: Energie- und Wasserautonomie</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-16e2cbe6d7c" alt="Phase 4 - Solaranlage und Wassersammlung" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Die ersten Photovoltaikanlagen und Regenwassersysteme sind installiert. Die Siedlung wird autarker und nutzt nachhaltige Ressourcen.</p>
+        </div>
+        <!-- Phase 5 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 5: Fertigstellung und Dockmöglichkeiten</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-9e2cbe6d7c" alt="Phase 5 - Dock und Pflanzen" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Die erste ZeppBamboo-Einheit ist fast vollständig bewohnt, mit befestigten Wänden und weiteren Innenausbauten. Ein Dock für Boote und viele neue Pflanzen zieren die Plattform.</p>
+        </div>
+        <!-- Phase 6 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 6: Bioversharmony und Gemeinschaftsleben</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-10e2cbe6d7c" alt="Phase 6 - Bioversharmony und Gemeinschaftsleben" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Die Einheiten sind miteinander verbunden, bilden eine schwimmende Gemeinschaft mit vielen Pflanzen, spielenden Kindern und einem lebendigen Ökosystem.</p>
+        </div>
+        <!-- Phase 7 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 7: Vernetzung und Andockstelle</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-11e2cbe6d7c" alt="Phase 7 - Vernetzung und Andockstelle" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Boote docken an, Bäume und Grün sind gepflanzt. Austausch zwischen verschiedenen Einheiten und Siedlungen ermöglicht neues Wachstum.</p>
+        </div>
+        <!-- Phase 8 -->
+        <div class="phase-card p-6">
+            <h2 class="text-3xl font-bold mb-4 text-gray-700">Phase 8: Regional Hub und Kreislaufwirtschaft</h2>
+            <img src="https://images.unsplash.com/photo-1705125125120-12e2cbe6d7c" alt="Phase 8 - Regional Hub und Kreislaufwirtschaft" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+            <p class="text-gray-700">Mehrere vernetzte Plattformen mit üppigen Aquaponik-Gärten, Recyclingzonen, Booten und gemeinschaftlicher Aktivität. Vorbild für Kreislaufwirtschaft und nachhaltige Entwicklung.</p>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-gray-500">
+        <p>&copy; 2023 ZeppBamboo-Projekt. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
   <meta charset="UTF-8">
   <title>ZeppBamboo Phase 4 – Autarke Systeme</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
