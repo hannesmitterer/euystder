@@ -1,0 +1,67 @@
+# ZeppBamboo Community – 2D-Visualisierung
+
+---
+
+## Übersicht
+
+**Mitte:**  
+- **Community Plaza** (Kreis oder Quadrat, zentral beschriftet)
+
+**Module:**  
+- 4–6 **ZeppBamboo-Module** (jeweils als grüne Rechtecke oder Quadrate)  
+- Symmetrisch um die Plaza gruppiert
+
+**Verbindungen:**  
+- **Brücken/Stege** (schwarze Linien) führen jeweils von der Plaza zu jedem Modul
+
+**Dokumentationsstationen:**  
+- Kleine Rechtecke am Rand des Plaza, jedes mit 📖-Symbol
+
+**Optionale Elemente:**  
+- **Sitzkreis** (kreisförmig um die Plaza, angedeutet durch kleine Kreise)
+- **Schattendach** (gestrichelte Linie über Plaza)
+- **Solarturm** (kleines Rechteck mit ⚡-Symbol neben der Plaza)
+
+**Erweiterungen:**  
+- Außen um die Module: **gestrichelte rote Linien** als Andockstellen für zukünftige Erweiterungen
+
+---
+
+## Symbol-Legende
+
+| Symbol           | Bedeutung                      |
+|------------------|-------------------------------|
+| 🟩 oder ▢        | ZeppBamboo-Modul               |
+| ⚫               | Community Plaza                |
+| ▬ (schwarz)     | Brücke/Steg                    |
+| 📖               | Dokumentationsstation          |
+| ⚡               | Solarturm                      |
+| ⚪               | Sitzkreis (optional)           |
+| - - - (rot)     | Erweiterungsanschluss          |
+| - - - (grau)    | Schattendach (optional)        |
+
+---
+
+## Skizzenbeschreibung (Text)
+
+```
+           - - - - - - - - - - (rot, Erweiterung)
+                ▢      ▢      ▢
+                   \    |    /
+                    \   |   /
+                      ⚫ Plaza
+                   /   |   \
+                ▢      ▢      ▢
+           - - - - - - - - - - (rot, Erweiterung)
+
+           ▬ Schwarze Linien = Brücken/Stege
+           📖 An den Rändern des Plaza
+           ⚡ Solarturm neben Plaza
+           - - - Gestrichelte Linie über Plaza = Schattendach
+           ⚪ Sitzkreis rund um Plaza (optional)
+```
+
+---
+
+**Hinweis:**  
+Diese Visualisierung ist bewusst einfach gehalten und kann als Vorlage für weitere, maßstabsgetreue oder farbige Grafiken dienen.
