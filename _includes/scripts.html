@@ -1,0 +1,104 @@
+{% if page.firebase_enabled %}
+<!-- Firebase SDKs laden -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Global variables provided by the environment
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    setLogLevel('debug');
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Sign in anonymously or with custom token
+    if (initialAuthToken) {
+        signInWithCustomToken(auth, initialAuthToken).catch((error) => {
+            console.error("Firebase Auth Error:", error);
+            signInAnonymously(auth);
+        });
+    } else {
+        signInAnonymously(auth);
+    }
+
+    // Functions for rendering and saving
+    function renderPhases(phases) {
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) return;
+        
+        mainContent.innerHTML = '';
+        phases.forEach((phase, index) => {
+            const card = document.createElement('div');
+            card.className = 'phase-card p-6 animate-in';
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.innerHTML = `
+                <h2 class="text-3xl font-bold mb-4 text-gray-700" contenteditable="true">${phase.title}</h2>
+                <img src="${phase.img}" alt="${phase.alt}" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
+                <p class="text-gray-700" contenteditable="true">${phase.text}</p>
+            `;
+            mainContent.appendChild(card);
+        });
+    }
+
+    // Save function
+    window.saveDocument = async () => {
+        const userId = auth.currentUser?.uid || "anonymous";
+        const docRef = doc(db, `artifacts/${appId}/public/data/zeppBamboo`);
+        
+        const phases = [];
+        document.querySelectorAll('.phase-card').forEach((card, index) => {
+            const title = card.querySelector('h2').textContent;
+            const img = card.querySelector('img').src;
+            const alt = card.querySelector('img').alt;
+            const text = card.querySelector('p').textContent;
+            phases.push({ id: index + 1, title, img, alt, text });
+        });
+        
+        try {
+            await setDoc(docRef, { phases, lastUpdatedBy: userId, lastUpdated: new Date() });
+            document.getElementById('save-status').textContent = 'Gespeichert!';
+            setTimeout(() => document.getElementById('save-status').textContent = '', 3000);
+        } catch (e) {
+            console.error("Fehler beim Speichern des Dokuments: ", e);
+            document.getElementById('save-status').textContent = 'Fehler beim Speichern!';
+        }
+    };
+
+    // Wait for auth to be ready and load data
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            const userId = user.uid;
+            const userIdElement = document.getElementById('user-id');
+            if (userIdElement) {
+                userIdElement.textContent = userId;
+            }
+            
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+
+            const docRef = doc(db, `artifacts/${appId}/public/data/zeppBamboo`);
+
+            // Listen for real-time updates
+            onSnapshot(docRef, (doc) => {
+                if (doc.exists()) {
+                    const data = doc.data();
+                    renderPhases(data.phases || []);
+                } else {
+                    // Use default phases from Jekyll data
+                    const defaultPhases = {{ site.data.phases | jsonify }};
+                    renderPhases(defaultPhases);
+                }
+            });
+        }
+    });
+</script>
+{% endif %}

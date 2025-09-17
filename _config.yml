@@ -1,0 +1,87 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+
+# Site settings
+title: ZeppBamboo
+description: "Die Vision erreicht die DeepAuraHarmony Stage: Eine Reise der Nachhaltigkeit, Schritt für Schritt"
+baseurl: "/euystder" # the subpath of your site, e.g. /blog
+url: "https://hannesmitterer.github.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  phases:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - scripts/
+  - "*.pdf"
+
+# Include
+include:
+  - _pages
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "ZeppBamboo Team"
+  - scope:
+      path: ""
+      type: "phases"
+    values:
+      layout: "phase"
+
+# Site metadata
+author: "ZeppBamboo Team"
+twitter_username: ""
+github_username: "hannesmitterer"
+
+# SEO Tag
+social:
+  name: ZeppBamboo
+  links:
+    - https://github.com/hannesmitterer/euystder
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Time zone
+timezone: Europe/Berlin
