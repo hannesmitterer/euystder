@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeppBamboo: Bauphasen im Sudan - Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="zpabamboo0.png">
+    <!-- Local fonts fallback -->
+    <style>
+        /* Fallback fonts for offline use */
+        @font-face {
+            font-family: 'Inter-fallback';
+            src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('sans-serif');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Playfair-fallback';
+            src: local('Georgia'), local('Times New Roman'), local('serif');
+            font-display: swap;
+        }
+        
+        /* Use fallback fonts if Google Fonts are blocked */
+        body {
+            font-family: 'Inter', 'Inter-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', 'Playfair-fallback', Georgia, serif;
+        }
+        
+        /* Additional specific styles for ZeppBamboo project */
+        .hero-bg {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+                url('zeppbamboo_vision.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, var(--primary-500), var(--bamboo-500));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+        }
+        
+        .gallery-preview {
+            background-image: url('gallery.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+            border-radius: var(--radius-2xl);
+            margin: var(--space-8) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-preview::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+        }
+        
+        .gallery-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: var(--space-8);
+            text-align: center;
+        }
+        
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-8) 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-100);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-600), var(--bamboo-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-top: var(--space-2);
+        }
+        
+        /* Icon system using Unicode */
+        .icon {
+            display: inline-block;
+            font-style: normal;
+            font-size: 1.2em;
+            margin-right: var(--space-2);
+        }
+        
+        .icon-phase::before { content: "🏗️"; }
+        .icon-water::before { content: "💧"; }
+        .icon-energy::before { content: "⚡"; }
+        .icon-bamboo::before { content: "🎋"; }
+        .icon-zepp::before { content: "🎈"; }
+        .icon-community::before { content: "👥"; }
+        .icon-eco::before { content: "🌱"; }
+        .icon-governance::before { content: "🏛️"; }
+        .icon-network::before { content: "🌐"; }
+        .icon-future::before { content: "🚀"; }
+        
+        /* Phase-specific styling */
+        .phase-1 { border-left: 4px solid var(--earth-500); }
+        .phase-2 { border-left: 4px solid var(--primary-500); }
+        .phase-3 { border-left: 4px solid var(--bamboo-500); }
+        .phase-4 { border-left: 4px solid var(--earth-400); }
+        .phase-5 { border-left: 4px solid var(--primary-600); }
+        .phase-6 { border-left: 4px solid var(--bamboo-600); }
+        .phase-7 { border-left: 4px solid var(--primary-400); }
+        .phase-8 { border-left: 4px solid var(--earth-600); }
+        .phase-9 { border-left: 4px solid var(--primary-700); }
+        .phase-10 { border-left: 4px solid var(--bamboo-700); }
+    </style>
+</head>
+<body>
+    <header class="header py-12 px-4">
+        <div class="header-content container">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-2 tracking-tight">ZeppBamboo Bauphasen</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6">Die Vision erreicht die DeepAuraHarmony Stage: Eine Reise der Nachhaltigkeit, Schritt für Schritt.</p>
+                
+                <!-- Project Statistics -->
+                <div class="project-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Bauphasen</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Nachhaltigkeit</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">♻️</div>
+                        <div class="stat-label">Kreislaufwirtschaft</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🌱</div>
+                        <div class="stat-label">Biomasse Integration</div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-gray-500 text-sm">
+                    <p>Demo-Version: <span class="font-mono font-bold text-gray-700">Vollständige UI/UX Optimierung</span></p>
+                </div>
+                <button onclick="alert('💾 Demo-Version - Speicherung deaktiviert')" class="btn btn-primary mt-6">
+                    💾 Speichern und Teilen
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Preview Section -->
+    <section class="container">
+        <div class="gallery-preview">
+            <div class="gallery-content">
+                <h2 class="text-3xl font-bold mb-4">Projekt Galerie</h2>
+                <p class="text-lg">Erleben Sie die vollständige Vision des ZeppBamboo-Projekts</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div id="main-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Content will be loaded by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="footer text-center py-8">
+        <div class="container">
+            <p class="text-gray-500">&copy; 2024 ZeppBamboo-Projekt. Alle Rechte vorbehalten.</p>
+            <p class="text-gray-400 text-sm mt-2">Nachhaltige Siedlungen für eine bessere Zukunft</p>
+        </div>
+    </footer>
+
+    <script>
+        // Demo data for all phases
+        const demoPhases = [
+            {
+                id: 1,
+                title: "Phase 1: Fundament und Auftrieb",
+                img: "zpabamboo1.png",
+                alt: "Phase 1 - Fundamentbau mit Bambus und Plastikkanistern",
+                text: "Ein Team von Bauenden errichtet die grundlegende Bambusgitterstruktur auf festem Boden nahe eines Gewässers. Recycelte Plastikkanister und Fässer, die vor Ort gesammelt wurden, werden sorgfältig in die Bambusrahmen eingearbeitet und verschnürt, um die Auftriebskörper zu bilden."
+            },
+            {
+                id: 2,
+                title: "Phase 2: Struktur und Plattformmontage",
+                img: "zpabamboo2.png",
+                alt: "Phase 2 - Montage der Grundstruktur auf dem Wasser",
+                text: "Die schwimmende Plattform ist nun im Wasser positioniert und wird stabilisiert. Arbeiter beginnen damit, die vertikalen Bambusstützen und den Rahmen für die erste Ebene der Gebäude zu errichten."
+            },
+            {
+                id: 3,
+                title: "Phase 3: Dachkonstruktion und integrierte Systeme",
+                img: "zpabamboo3.png",
+                alt: "Phase 3 - Bau des Daches und Aquaponik-Systeme",
+                text: "Die Bambusrahmen für die Gebäude sind weitgehend fertiggestellt. Arbeiter sind dabei, Dächer aus Schilf und getrocknetem Lehm zu montieren, die sowohl Schutz als auch natürliche Isolierung bieten."
+            },
+            {
+                id: 4,
+                title: "Phase 4: Energie- und Wasserautonomie",
+                img: "zpabamboo4.png",
+                alt: "Phase 4 - Solaranlage und Wassersammlung",
+                text: "Die Grundstruktur der ersten Hütte ist weitgehend abgeschlossen, und die 'ZeppBamboo'-Siedlung macht einen großen Schritt in Richtung Autarkie. Auf dem Dach der Hütte ist eine kleine Photovoltaikanlage sichtbar."
+            },
+            {
+                id: 5,
+                title: "Phase 5: Fertigstellung und Dockmöglichkeiten",
+                img: "zpabamboo5.png",
+                alt: "Phase 5 - Dock und Pflanzen",
+                text: "Die erste ZeppBamboo-Einheit ist fast vollständig bewohnt, mit befestigten Wänden und weiteren Innenausbauten. Eine einfache, aber robuste Docking-Möglichkeit aus Bambus und recyceltem Holz ist angefügt."
+            },
+            {
+                id: 6,
+                title: "Phase 6: Bioversharmony und Gemeinschaftsleben",
+                img: "zpabamboo6.png",
+                alt: "Phase 6 - Bioversharmony und Gemeinschaftsleben",
+                text: "Die ZeppBamboo-Einheit ist nun vollständig bewohnt und bildet einen blühenden Mikrokosmos. Mehrere modulare Einheiten wurden miteinander verbunden und bilden eine kleine schwimmende Gemeinschaft."
+            },
+            {
+                id: 7,
+                title: "Phase 7: Zepp-Integration und Mobilität",
+                img: "zpabamboo7.png",
+                alt: "Phase 7 - Zepp-Integration und Mobilität",
+                text: "Die namensgebenden Zeppeline werden in das Projekt integriert. Kleinere, mit Biogas betriebene Bambus-Zepp-Module dienen zur Mobilität und Erkundung."
+            },
+            {
+                id: 8,
+                title: "Phase 8: Echodemokratie und Governance",
+                img: "zpabamboo8.png",
+                alt: "Phase 8 - Echodemokratie und Governance",
+                text: "Die ZeppBamboo-Gemeinschaft etabliert formelle echodemokratische Strukturen für die kollektive Entscheidungsfindung."
+            },
+            {
+                id: 9,
+                title: "Phase 9: Regionaler Hub und Advanced Circularity",
+                img: "zpabamboo0.png",
+                alt: "Phase 9 - Regionaler Hub und Advanced Circularity",
+                text: "Die ZeppBamboo-Siedlung hat sich zu einem vitalen regionalen Hub auf dem Wasser entwickelt. Mehrere große, miteinander verbundene schwimmende Inseln bilden ein geschäftiges Netzwerk."
+            },
+            {
+                id: 10,
+                title: "Phase 10: Globale Verbreitung und Wissensaustausch",
+                img: "zpabamboo00.png",
+                alt: "Phase 10 - Globale Verbreitung und Wissensaustausch",
+                text: "ZeppBamboo ist nun eine globale Bewegung, die ihr Wissen und ihre Technologie mit Gemeinschaften auf der ganzen Welt teilt."
+            }
+        ];
+
+        function createImageElement(phase) {
+            const img = document.createElement('img');
+            img.src = phase.img;
+            img.alt = phase.alt;
+            img.className = 'w-full h-auto object-cover rounded-lg mb-4 shadow-md';
+            
+            // Add error handling for images
+            img.onerror = function() {
+                // Replace with placeholder if image fails to load
+                const placeholder = document.createElement('div');
+                placeholder.className = 'image-placeholder';
+                placeholder.textContent = `📸 Grafik für ${phase.title}`;
+                placeholder.dataset.originalSrc = phase.img;
+                this.parentNode.replaceChild(placeholder, this);
+            };
+            
+            return img;
+        }
+
+        function renderPhases(phases) {
+            const mainContent = document.getElementById('main-content');
+            mainContent.innerHTML = '';
+            
+            // Phase icons mapping
+            const phaseIcons = ['icon-phase', 'icon-water', 'icon-bamboo', 'icon-energy', 'icon-phase', 'icon-eco', 'icon-community', 'icon-zepp', 'icon-governance', 'icon-network', 'icon-future'];
+            
+            phases.forEach((phase, index) => {
+                const card = document.createElement('div');
+                card.className = `card phase-card phase-${phase.id} p-6 animate-fade-in`;
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // Create phase number badge
+                const phaseNumber = document.createElement('div');
+                phaseNumber.className = 'phase-number';
+                phaseNumber.textContent = phase.id;
+                
+                // Create image element with error handling
+                const imageElement = createImageElement(phase);
+                
+                // Create content with icon
+                const title = document.createElement('h2');
+                title.className = 'text-2xl font-bold mb-4 text-gray-700';
+                
+                const iconSpan = document.createElement('span');
+                iconSpan.className = `icon ${phaseIcons[phase.id - 1] || 'icon-phase'}`;
+                
+                title.appendChild(iconSpan);
+                title.appendChild(document.createTextNode(phase.title));
+                
+                const text = document.createElement('p');
+                text.className = 'text-gray-600';
+                text.textContent = phase.text;
+                
+                // Assemble card
+                card.appendChild(phaseNumber);
+                card.appendChild(title);
+                card.appendChild(imageElement);
+                card.appendChild(text);
+                
+                mainContent.appendChild(card);
+            });
+        }
+
+        // Load demo content when page is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPhases(demoPhases);
+        });
+    </script>
+</body>
+</html>
