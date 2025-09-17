@@ -6,7 +6,57 @@
     <title>ZeppBamboo Community - Nachhaltige Schwimmende Siedlungen</title>
     <meta name="description" content="ZeppBamboo ist ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen und modernen Kreislaufwirtschaftsprinzipien.">
     <meta name="keywords" content="ZeppBamboo, nachhaltige Siedlungen, Bambus, Kreislaufwirtschaft, schwimmende Häuser, Sudan, Klimawandel, Aquaponik, Solarenergie">
+    <meta name="author" content="ZeppBamboo Community">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hannesmitterer.github.io/euystder/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ZeppBamboo Community - Nachhaltige Schwimmende Siedlungen">
+    <meta property="og:description" content="Ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen und modernen Kreislaufwirtschaftsprinzipien.">
+    <meta property="og:image" content="https://hannesmitterer.github.io/euystder/zeppbamboo_vision.jpeg">
+    <meta property="og:url" content="https://hannesmitterer.github.io/euystder/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ZeppBamboo Community - Nachhaltige Schwimmende Siedlungen">
+    <meta name="twitter:description" content="Ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen.">
+    <meta name="twitter:image" content="https://hannesmitterer.github.io/euystder/zeppbamboo_vision.jpeg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="zpabamboo1.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="zeppbamboo_vision.jpeg" as="image">
+    <link rel="preload" href="zpabamboo1.png" as="image">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ZeppBamboo Community",
+        "description": "Ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen und modernen Kreislaufwirtschaftsprinzipien.",
+        "url": "https://hannesmitterer.github.io/euystder/",
+        "logo": "https://hannesmitterer.github.io/euystder/zpabamboo1.png",
+        "sameAs": ["https://github.com/hannesmitterer/euystder"],
+        "foundingDate": "2023",
+        "foundingLocation": {
+            "@type": "Place",
+            "name": "Sudan"
+        },
+        "knowsAbout": [
+            "Nachhaltige Architektur",
+            "Schwimmende Siedlungen", 
+            "Bambusbau",
+            "Kreislaufwirtschaft",
+            "Aquaponik",
+            "Solarenergie",
+            "Gemeinschaftsleben"
+        ]
+    }
+    </script>
     
     <style>
         /* Modern CSS Reset */
@@ -492,9 +542,9 @@
             {
                 id: 8,
                 title: "Phase 8: Echodemokratie und Governance",
-                img: "zpabamboo8.png",
+                img: "zpabamboo08.png",
                 alt: "Phase 8 - Echodemokratie und Governance", 
-                text: "Die ZeppBamboo-Gemeinschaft etabliert formelle echodemokratische Struktururen für die kollektive Entscheidungsfindung. Die schwimmenden Inseln werden so umgestaltet, dass sie einen zentralen Versammlungsplatz für demokratische Sitzungen beherbergen. Entscheidungen über Ressourcenmanagement, die Nutzung erneuerbarer Energien und die Expansion der Siedlung werden gemeinsam getroffen. Die ZeppBamboo-Siedlung wird zu einem Modell für eine nachhaltige und selbstverwaltete Gemeinschaft, die auf den Prinzipien der ökologischen und sozialen Harmonie beruht."
+                text: "Die ZeppBamboo-Gemeinschaft etabliert formelle echodemokratische Strukturen für die kollektive Entscheidungsfindung. Die schwimmenden Inseln werden so umgestaltet, dass sie einen zentralen Versammlungsplatz für demokratische Sitzungen beherbergen. Entscheidungen über Ressourcenmanagement, die Nutzung erneuerbarer Energien und die Expansion der Siedlung werden gemeinsam getroffen. Die ZeppBamboo-Siedlung wird zu einem Modell für eine nachhaltige und selbstverwaltete Gemeinschaft, die auf den Prinzipien der ökologischen und sozialen Harmonie beruht."
             }
         ];
 
@@ -547,7 +597,7 @@
                 
                 phaseCard.innerHTML = `
                     <div class="phase-number">${phase.id}</div>
-                    <img src="${phase.img}" alt="${phase.alt}" onerror="this.style.display='none'">
+                    <img src="${phase.img}" alt="${phase.alt}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.marginTop='var(--spacing-lg)';">
                     <div class="phase-card-content">
                         <h3>${phase.title}</h3>
                         <p>${phase.text}</p>
@@ -654,7 +704,7 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <img src="zeppbamboo_vision.jpeg" alt="ZeppBamboo Vision" style="max-width: 100%; height: auto; border-radius: var(--border-radius);">
+                    <img src="zeppbamboo_vision.jpeg" alt="ZeppBamboo Vision" loading="lazy" style="max-width: 100%; height: auto; border-radius: var(--border-radius);">
                 </div>
             </div>
         </div>
