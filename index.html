@@ -3,229 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeppBamboo: Bauphasen im Sudan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ZeppBamboo Community - Nachhaltige Schwimmende Siedlungen</title>
+    <meta name="description" content="ZeppBamboo ist ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen und modernen Kreislaufwirtschaftsprinzipien.">
+    <meta name="keywords" content="ZeppBamboo, nachhaltige Siedlungen, Bambus, Kreislaufwirtschaft, schwimmende Häuser, Sudan, Klimawandel, Aquaponik, Solarenergie">
+    <link rel="canonical" href="https://hannesmitterer.github.io/euystder/">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        /* Modern CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* CSS Variables for consistent theming */
+        :root {
+            --color-primary: #2c5530;
+            --color-primary-light: #4a7c59;
+            --color-secondary: #8b4513;
+            --color-accent: #228b22;
+            --color-water: #4682b4;
+            --color-background: #f8f9fa;
+            --color-background-alt: #e9ecef;
+            --color-text: #343a40;
+            --color-text-light: #6c757d;
+            --color-white: #ffffff;
+            --color-border: #dee2e6;
+            
+            --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-size-base: 1rem;
+            --line-height-base: 1.6;
+            
+            --border-radius: 0.75rem;
+            --border-radius-small: 0.375rem;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+        }
+        
+        /* Base styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
-            color: #343a40;
+            font-family: var(--font-family-base);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+            color: var(--color-text);
+            background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-alt) 100%);
+            min-height: 100vh;
         }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-primary);
+        }
+        
+        h1 { font-size: 3rem; font-weight: 700; }
+        h2 { font-size: 2.25rem; font-weight: 600; }
+        h3 { font-size: 1.875rem; font-weight: 600; }
+        h4 { font-size: 1.5rem; font-weight: 500; }
+        
+        p {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-light);
+        }
+        
+        /* Layout utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .section {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+        
+        .grid-auto-fit {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flex-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        
+        /* Component styles */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: var(--spacing-lg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius-small);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: var(--color-white);
+        }
+        
+        .btn-secondary:hover {
+            background: #a0522d;
+            transform: translateY(-1px);
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--color-white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-xl);
+        }
+        
+        /* Phase cards */
         .phase-card {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            transform: translateY(0);
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
         .phase-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
         }
-        /* Fade-in animation for cards */
-        @keyframes fadeIn {
+        
+        .phase-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .phase-card-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .phase-card h3 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-primary);
+        }
+        
+        .phase-number {
+            background: var(--color-accent);
+            color: var(--color-white);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            position: absolute;
+            top: var(--spacing-sm);
+            left: var(--spacing-sm);
+        }
+        
+        /* Technical guide styles */
+        .guide-section {
+            background: var(--color-white);
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .guide-header {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--spacing-lg);
+        }
+        
+        .guide-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .guide-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .guide-list li {
+            padding: var(--spacing-xs) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .guide-list li:before {
+            content: "✓";
+            color: var(--color-accent);
+            font-weight: bold;
+            margin-right: var(--spacing-sm);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-white);
+                flex-direction: column;
+                padding: var(--spacing-sm);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            
+            .hero p {
+                font-size: 1.125rem;
+            }
+            
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section {
+                padding: var(--spacing-xl) 0;
+            }
+            
+            h1 { font-size: 2rem; }
+            
+            .card {
+                padding: var(--spacing-md);
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        .phase-card.animate-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Print styles */
+        @media print {
+            .nav, .btn {
+                display: none;
+            }
+            
+            .hero {
+                background: none !important;
+                color: var(--color-text) !important;
+            }
+            
+            .hero h1 {
+                color: var(--color-primary) !important;
+            }
+            
+            .phase-card {
+                break-inside: avoid;
+                margin-bottom: var(--spacing-lg);
+            }
+        }
+        
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus styles for better accessibility */
+        .btn:focus,
+        .nav-link:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
         }
     </style>
-    <!-- Firebase SDKs laden -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables provided by the environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        setLogLevel('debug');
-        
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // Sign in anonymously or with custom token
-        if (initialAuthToken) {
-            signInWithCustomToken(auth, initialAuthToken).catch((error) => {
-                console.error("Firebase Auth Error:", error);
-                signInAnonymously(auth);
-            });
-        } else {
-            signInAnonymously(auth);
-        }
-
-        // Wait for auth to be ready
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                const userId = user.uid;
-                document.getElementById('user-id').textContent = userId;
-                document.getElementById('loading').style.display = 'none';
-
-                const docRef = doc(db, `artifacts/${appId}/public/data/zeppBamboo`);
-
-                // Listen for real-time updates
-                onSnapshot(docRef, (doc) => {
-                    if (doc.exists()) {
-                        const data = doc.data();
-                        renderPhases(data.phases || []);
-                    } else {
-                        // Document doesn't exist, maybe create it with initial data
-                        const initialPhases = [
-                            {
-                                id: 1,
-                                title: "Phase 1: Fundament und Auftrieb",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 1 - Fundamentbau mit Bambus und Plastikkanistern",
-                                text: "Ein Team von Bauenden errichtet die grundlegende Bambusgitterstruktur auf festem Boden nahe eines Gewässers. Recycelte Plastikkanister und Fässer, die vor Ort gesammelt wurden, werden sorgfältig in die Bambusrahmen eingearbeitet und verschnürt, um die Auftriebskörper zu bilden. Traditionelle Seil- und Bambusverbindungstechniken sind sichtbar, die von erfahrenen Handwerkern angewendet werden, während die Gemeinschaft hilft, die Materialien zu sammeln und vorzubereiten."
-                            },
-                            {
-                                id: 2,
-                                title: "Phase 2: Struktur und Plattformmontage",
-                                img: "https://storage.googleapis.com/uploaded-file-references/zpabamboo4.jpg",
-                                alt: "Phase 2 - Montage der Grundstruktur auf dem Wasser",
-                                text: "Die schwimmende Plattform ist nun im Wasser positioniert und wird stabilisiert. Arbeiter beginnen damit, die vertikalen Bambusstützen und den Rahmen für die erste Ebene der Gebäude zu errichten. Die Plattform ist mit einer Verankerung gesichert, während andere Elemente wie Lehmziegel und Schilfrohrmatten für Wände und Dächer vorbereitet werden. Es herrscht reger Betrieb, während die Gemeinschaft zusammenarbeitet, um die Struktur weiter aufzubauen."
-                            },
-                            {
-                                id: 3,
-                                title: "Phase 3: Dachkonstruktion und integrierte Systeme",
-                                img: "https://storage.googleapis.com/uploaded-file-references/zpabamboo3.jpg",
-                                alt: "Phase 3 - Bau des Daches und Aquaponik-Systeme",
-                                text: "Die Bambusrahmen für die Gebäude sind weitgehend fertiggestellt. Arbeiter sind dabei, Dächer aus Schilf und getrocknetem Lehm zu montieren, die sowohl Schutz als auch natürliche Isolierung bieten. Eine wichtige Neuerung sind die integrierten Aquaponik-Systeme: Auf einer der Plattformen sind erste Pflanzbeete sichtbar, die in Verbindung mit einem Fischzuchtbecken stehen, um eine nachhaltige Nahrungsmittelproduktion zu ermöglichen. Weiterhin sind Vorbereitungen für einfache Regenwassersammelsysteme zu erkennen, die Wasser von den Dächern in Behälter leiten sollen."
-                            },
-                            {
-                                id: 4,
-                                title: "Phase 4: Energie- und Wasserautonomie",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 4 - Solaranlage und Wassersammlung",
-                                text: "Die Grundstruktur der ersten Hütte ist weitgehend abgeschlossen, und die 'ZeppBamboo'-Siedlung macht einen großen Schritt in Richtung Autarkie. Auf dem Dach der Hütte ist eine kleine Photovoltaikanlage sichtbar, die erste Solarenergie für die Bewohner erzeugen wird. Direkt daneben befindet sich ein einfaches Regenwassersammelsystem, das Wasser in einen großen, auf der Plattform montierten Tank leitet. Ein niedrigtechnologisches Filtersystem, möglicherweise aus Schichten von Sand und Kies, ist neben dem Tank angebracht, um das gesammelte Wasser zu reinigen. Die Aquaponik-Beete gedeihen bereits, und die Gemeinschaft arbeitet weiterhin Hand in Hand."
-                            },
-                            {
-                                id: 5,
-                                title: "Phase 5: Fertigstellung und Dockmöglichkeiten",
-                                img: "https://storage.googleapis.com/uploaded-file-references/zpabamboo5.jpg",
-                                alt: "Phase 5 - Dock und Pflanzen",
-                                text: "Die erste ZeppBamboo-Einheit ist fast vollständig bewohnt, mit befestigten Wänden und weiteren Innenausbauten. Eine einfache, aber robuste Docking-Möglichkeit aus Bambus und recyceltem Holz ist an die schwimmende Plattform angefügt. Sie ermöglicht kleinen Booten das sichere Anlegen und dient als Einstiegspunkt zur Struktur. Weitere grüne Elemente wie Pflanzen und kleine Bäume sind auf der Plattform angepflanzt, was die Lebensqualität erhöht und Schatten spendet. Die Photovoltaik-Anlage und das Wassersystem sind voll funktionsfähig, und die Aquaponik-Beete tragen erste Ernten."
-                            },
-                            {
-                                id: 6,
-                                title: "Phase 6: Bioversharmony und Gemeinschaftsleben",
-                                img: "https://storage.googleapis.com/uploaded-file-references/zpabamboo6.jpg",
-                                alt: "Phase 6 - Bioversharmony und Gemeinschaftsleben",
-                                text: "Die ZeppBamboo-Einheit ist nun vollständig bewohnt und bildet einen blühenden Mikrokosmos. Mehrere modulare Einheiten wurden miteinander verbunden und bilden eine kleine schwimmende Gemeinschaft. Die Oberflächen sind mit einer Fülle von einheimischen Pflanzen und Gemüsegärten bedeckt, die nicht nur Nahrung liefern, sondern auch die Biodiversität anziehen. Im Wasser unter und um die Plattform herum sind einfache Netze oder Strukturen angebracht, die als Laichgebiete und Schutzräume für Fische dienen, wodurch ein florierendes Ökosystem gefördert wird. Kinder spielen sicher auf den Plattformen, und kleine Boote bewegen sich friedlich zwischen den Einheiten."
-                            },
-                            {
-                                id: 7,
-                                title: "Phase 7: Zepp-Integration und Mobilität",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 7 - Zepp-Integration und Mobilität",
-                                text: "Die namensgebenden Zeppeline werden in das Projekt integriert. Kleinere, mit Biogas betriebene Bambus-Zepp-Module dienen zur Mobilität und Erkundung. Ein Start- und Landeplatz aus Bambus wird gebaut, um die schwebenden Zepp-Module aufzunehmen. Diese Zeppeline ermöglichen es den Mitgliedern der ZeppBamboo-Siedlung, die umliegenden Gebiete zu erkunden, Ressourcen zu transportieren und andere Gemeinschaften zu erreichen, ohne die Wasserwege zu verlassen."
-                            },
-                            {
-                                id: 8,
-                                title: "Phase 8: Echodemokratie und Governance",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 8 - Echodemokratie und Governance",
-                                text: "Die ZeppBamboo-Gemeinschaft etabliert formelle echodemokratische Strukturen für die kollektive Entscheidungsfindung. Die schwimmenden Inseln werden so umgestaltet, dass sie einen zentralen Versammlungsplatz für demokratische Sitzungen beherbergen. Entscheidungen über Ressourcenmanagement, die Nutzung erneuerbarer Energien und die Expansion der Siedlung werden gemeinsam getroffen. Die ZeppBamboo-Siedlung wird zu einem Modell für eine nachhaltige und selbstverwaltete Gemeinschaft, die auf den Prinzipien der ökologischen und sozialen Harmonie beruht."
-                            },
-                            {
-                                id: 9,
-                                title: "Phase 9: Regionaler Hub und Advanced Circularity",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 9 - Regionaler Hub und Advanced Circularity",
-                                text: "Die ZeppBamboo-Siedlung hat sich zu einem vitalen regionalen Hub auf dem Wasser entwickelt. Mehrere große, miteinander verbundene schwimmende Inseln bilden ein geschäftiges Netzwerk von Häusern, Gemeinschaftseinrichtungen und spezialisierten Produktionszonen. Fortgeschrittene Prinzipien der Kreislaufwirtschaft sind vollständig integriert: Neben Aquaponik und Regenwassernutzung sind spezialisierte Einheiten für Abfalltrennung, Materialrecycling und organische Kompostierung sichtbar. Größere Zeppeline, die Fracht oder größere Personengruppen transportieren, verbinden dieses zentrale Drehkreuz mit kleineren ZeppBamboo-Außenposten oder Festlandgemeinschaften, was den Handel, die Bildung und den Ressourcenaustausch erleichtert."
-                            },
-                            {
-                                id: 10,
-                                title: "Phase 10: Globale Verbreitung und Wissensaustausch",
-                                img: "https://gemini-generated-images.s3.us-west-1.amazonaws.com/generated/image-1718131362098-33621455-9b2f-412e-a50e-b873528b7e8d.png",
-                                alt: "Phase 10 - Globale Verbreitung und Wissensaustausch",
-                                text: "ZeppBamboo ist nun eine globale Bewegung, die ihr Wissen und ihre Technologie mit Gemeinschaften auf der ganzen Welt teilt. Die ursprüngliche Siedlung dient als globales Hauptquartier für die 'Echodemokratie'-Bewegung. Seminare und Workshops werden abgehalten, um die ZeppBamboo-Technologie in anderen Ländern mit ähnlichen Herausforderungen zu replizieren. Zeppeline transportieren jetzt nicht nur Waren und Menschen, sondern auch Lehrer, Ingenieure und Gemeinschaftsleiter, um das Wissen über nachhaltiges Wohnen und demokratische Governance in der gesamten Welt zu verbreiten."
-                            }
-                        ];
-                        setDoc(docRef, { phases: initialPhases }).catch(e => console.error("Error setting initial document:", e));
-                    }
-                }, (error) => {
-                    console.error("Firestore onSnapshot error:", error);
-                });
-            } else {
-                console.log("Not authenticated yet.");
+    <script>
+        // Static data for ZeppBamboo phases (no external dependencies)
+        const zeppBambooPhases = [
+            {
+                id: 1,
+                title: "Phase 1: Fundament und Auftrieb",
+                img: "zpabamboo1.png",
+                alt: "Phase 1 - Fundamentbau mit Bambus und Plastikkanistern",
+                text: "Ein Team von Bauenden errichtet die grundlegende Bambusgitterstruktur auf festem Boden nahe eines Gewässers. Recycelte Plastikkanister und Fässer, die vor Ort gesammelt wurden, werden sorgfältig in die Bambusrahmen eingearbeitet und verschnürt, um die Auftriebskörper zu bilden. Traditionelle Seil- und Bambusverbindungstechniken sind sichtbar, die von erfahrenen Handwerkern angewendet werden, während die Gemeinschaft hilft, die Materialien zu sammeln und vorzubereiten."
+            },
+            {
+                id: 2,
+                title: "Phase 2: Struktur und Plattformmontage",
+                img: "zpabamboo2.png",
+                alt: "Phase 2 - Montage der Grundstruktur auf dem Wasser",
+                text: "Die schwimmende Plattform ist nun im Wasser positioniert und wird stabilisiert. Arbeiter beginnen damit, die vertikalen Bambusstützen und den Rahmen für die erste Ebene der Gebäude zu errichten. Die Plattform ist mit einer Verankerung gesichert, während andere Elemente wie Lehmziegel und Schilfrohrmatten für Wände und Dächer vorbereitet werden. Es herrscht reger Betrieb, während die Gemeinschaft zusammenarbeitet, um die Struktur weiter aufzubauen."
+            },
+            {
+                id: 3,
+                title: "Phase 3: Dachkonstruktion und integrierte Systeme",
+                img: "zpabamboo3.png",
+                alt: "Phase 3 - Bau des Daches und Aquaponik-Systeme",
+                text: "Die Bambusrahmen für die Gebäude sind weitgehend fertiggestellt. Arbeiter sind dabei, Dächer aus Schilf und getrocknetem Lehm zu montieren, die sowohl Schutz als auch natürliche Isolierung bieten. Eine wichtige Neuerung sind die integrierten Aquaponik-Systeme: Auf einer der Plattformen sind erste Pflanzbeete sichtbar, die in Verbindung mit einem Fischzuchtbecken stehen, um eine nachhaltige Nahrungsmittelproduktion zu ermöglichen. Weiterhin sind Vorbereitungen für einfache Regenwassersammelsysteme zu erkennen, die Wasser von den Dächern in Behälter leiten sollen."
+            },
+            {
+                id: 4,
+                title: "Phase 4: Energie- und Wasserautonomie",
+                img: "zpabamboo4.png",
+                alt: "Phase 4 - Solaranlage und Wassersammlung",
+                text: "Die Grundstruktur der ersten Hütte ist weitgehend abgeschlossen, und die 'ZeppBamboo'-Siedlung macht einen großen Schritt in Richtung Autarkie. Auf dem Dach der Hütte ist eine kleine Photovoltaikanlage sichtbar, die erste Solarenergie für die Bewohner erzeugen wird. Direkt daneben befindet sich ein einfaches Regenwassersammelsystem, das Wasser in einen großen, auf der Plattform montierten Tank leitet. Ein niedrigtechnologisches Filtersystem, möglicherweise aus Schichten von Sand und Kies, ist neben dem Tank angebracht, um das gesammelte Wasser zu reinigen. Die Aquaponik-Beete gedeihen bereits, und die Gemeinschaft arbeitet weiterhin Hand in Hand."
+            },
+            {
+                id: 5,
+                title: "Phase 5: Fertigstellung und Dockmöglichkeiten",
+                img: "zpabamboo5.png",
+                alt: "Phase 5 - Dock und Pflanzen",
+                text: "Die erste ZeppBamboo-Einheit ist fast vollständig bewohnt, mit befestigten Wänden und weiteren Innenausbauten. Eine einfache, aber robuste Docking-Möglichkeit aus Bambus und recyceltem Holz ist an die schwimmende Plattform angefügt. Sie ermöglicht kleinen Booten das sichere Anlegen und dient als Einstiegspunkt zur Struktur. Weitere grüne Elemente wie Pflanzen und kleine Bäume sind auf der Plattform angepflanzt, was die Lebensqualität erhöht und Schatten spendet. Die Photovoltaik-Anlage und das Wassersystem sind voll funktionsfähig, und die Aquaponik-Beete tragen erste Ernten."
+            },
+            {
+                id: 6,
+                title: "Phase 6: Bioversharmony und Gemeinschaftsleben",
+                img: "zpabamboo6.png",
+                alt: "Phase 6 - Bioversharmony und Gemeinschaftsleben",
+                text: "Die ZeppBamboo-Einheit ist nun vollständig bewohnt und bildet einen blühenden Mikrokosmos. Mehrere modulare Einheiten wurden miteinander verbunden und bilden eine kleine schwimmende Gemeinschaft. Die Oberflächen sind mit einer Fülle von einheimischen Pflanzen und Gemüsegärten bedeckt, die nicht nur Nahrung liefern, sondern auch die Biodiversität anziehen. Im Wasser unter und um die Plattform herum sind einfache Netze oder Strukturen angebracht, die als Laichgebiete und Schutzräume für Fische dienen, wodurch ein florierendes Ökosystem gefördert wird. Kinder spielen sicher auf den Plattformen, und kleine Boote bewegen sich friedlich zwischen den Einheiten."
+            },
+            {
+                id: 7,
+                title: "Phase 7: Zepp-Integration und Mobilität",
+                img: "zpabamboo7.png",
+                alt: "Phase 7 - Zepp-Integration und Mobilität",
+                text: "Die namensgebenden Zeppeline werden in das Projekt integriert. Kleinere, mit Biogas betriebene Bambus-Zepp-Module dienen zur Mobilität und Erkundung. Ein Start- und Landeplatz aus Bambus wird gebaut, um die schwebenden Zepp-Module aufzunehmen. Diese Zeppeline ermöglichen es den Mitgliedern der ZeppBamboo-Siedlung, die umliegenden Gebiete zu erkunden, Ressourcen zu transportieren und andere Gemeinschaften zu erreichen, ohne die Wasserwege zu verlassen."
+            },
+            {
+                id: 8,
+                title: "Phase 8: Echodemokratie und Governance",
+                img: "zpabamboo8.png",
+                alt: "Phase 8 - Echodemokratie und Governance", 
+                text: "Die ZeppBamboo-Gemeinschaft etabliert formelle echodemokratische Struktururen für die kollektive Entscheidungsfindung. Die schwimmenden Inseln werden so umgestaltet, dass sie einen zentralen Versammlungsplatz für demokratische Sitzungen beherbergen. Entscheidungen über Ressourcenmanagement, die Nutzung erneuerbarer Energien und die Expansion der Siedlung werden gemeinsam getroffen. Die ZeppBamboo-Siedlung wird zu einem Modell für eine nachhaltige und selbstverwaltete Gemeinschaft, die auf den Prinzipien der ökologischen und sozialen Harmonie beruht."
             }
+        ];
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            renderPhases();
+            initializeAnimations();
         });
 
-        // Save function
-        window.saveDocument = async () => {
-            const userId = auth.currentUser?.uid || "anonymous";
-            const docRef = doc(db, `artifacts/${appId}/public/data/zeppBamboo`);
+        // Navigation functionality
+        function initializeNavigation() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
             
-            const phases = [];
-            document.querySelectorAll('.phase-card').forEach((card, index) => {
-                const title = card.querySelector('h2').textContent;
-                const img = card.querySelector('img').src;
-                const alt = card.querySelector('img').alt;
-                const text = card.querySelector('p').textContent;
-                phases.push({ id: index + 1, title, img, alt, text });
-            });
-            
-            try {
-                await setDoc(docRef, { phases, lastUpdatedBy: userId, lastUpdated: new Date() });
-                document.getElementById('save-status').textContent = 'Gespeichert!';
-                setTimeout(() => document.getElementById('save-status').textContent = '', 3000);
-            } catch (e) {
-                console.error("Fehler beim Speichern des Dokuments: ", e);
-                document.getElementById('save-status').textContent = 'Fehler beim Speichern!';
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
             }
-        };
 
-        function renderPhases(phases) {
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = '';
-            phases.forEach((phase, index) => {
-                const card = document.createElement('div');
-                card.className = 'phase-card p-6 animate-in';
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.innerHTML = `
-                    <h2 class="text-3xl font-bold mb-4 text-gray-700" contenteditable="true">${phase.title}</h2>
-                    <img src="${phase.img}" alt="${phase.alt}" class="w-full h-auto object-cover rounded-lg mb-4 shadow-md">
-                    <p class="text-gray-700" contenteditable="true">${phase.text}</p>
-                `;
-                mainContent.appendChild(card);
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        if (navMenu) navMenu.classList.remove('active');
+                    }
+                });
             });
         }
+
+        // Render building phases
+        function renderPhases() {
+            const phasesContainer = document.getElementById('phases-grid');
+            if (!phasesContainer) return;
+            
+            phasesContainer.innerHTML = '';
+            
+            zeppBambooPhases.forEach((phase, index) => {
+                const phaseCard = document.createElement('div');
+                phaseCard.className = 'phase-card';
+                phaseCard.style.position = 'relative';
+                
+                phaseCard.innerHTML = `
+                    <div class="phase-number">${phase.id}</div>
+                    <img src="${phase.img}" alt="${phase.alt}" onerror="this.style.display='none'">
+                    <div class="phase-card-content">
+                        <h3>${phase.title}</h3>
+                        <p>${phase.text}</p>
+                    </div>
+                `;
+                
+                phasesContainer.appendChild(phaseCard);
+                
+                // Add animation delay
+                setTimeout(() => {
+                    phaseCard.classList.add('animate-fade-in');
+                }, index * 100);
+            });
+        }
+
+        // Initialize scroll animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all cards and sections
+            document.querySelectorAll('.card, .guide-section').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Utility functions for better UX
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add scroll-to-top functionality
+        window.addEventListener('scroll', function() {
+            const scrollButton = document.getElementById('scroll-to-top');
+            if (scrollButton) {
+                if (window.pageYOffset > 300) {
+                    scrollButton.style.display = 'block';
+                } else {
+                    scrollButton.style.display = 'none';
+                }
+            }
+        });
     </script>
 </head>
-<body class="p-4 md:p-8">
-    <header class="text-center py-12 px-4">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-2 tracking-tight">ZeppBamboo Bauphasen</h1>
-        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Die Vision erreicht die DeepAuraHarmony Stage: Eine Reise der Nachhaltigkeit, Schritt für Schritt.</p>
-        <div class="mt-4 text-gray-500 text-sm">
-            <p>Ihre Benutzer-ID: <span id="user-id" class="font-mono font-bold text-gray-700">Laden...</span></p>
-            <p class="mt-2 text-green-600" id="save-status"></p>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" aria-label="ZeppBamboo Startseite">ZeppBamboo</a>
+            <ul class="nav-menu">
+                <li><a href="#vision" class="nav-link">Vision</a></li>
+                <li><a href="#bauphasen" class="nav-link">Bauphasen</a></li>
+                <li><a href="#anleitung" class="nav-link">Anleitung</a></li>
+                <li><a href="#grundriss" class="nav-link">Grundriss</a></li>
+                <li><a href="#gemeinschaft" class="nav-link">Gemeinschaft</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
         </div>
-        <button onclick="saveDocument()" class="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-full font-bold shadow-lg hover:bg-indigo-700 transition duration-300">
-            Speichern und Teilen
-        </button>
-    </header>
+    </nav>
 
-    <main id="main-content" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <p id="loading" class="text-center text-lg text-gray-500 col-span-full">Lade Inhalt...</p>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero" id="vision">
+        <div class="container text-center">
+            <h1>ZeppBamboo Community</h1>
+            <p>Ein ganzheitliches Konzept für nachhaltige, schwimmende Siedlungen mit traditionellen Low-Tech-Bauweisen und modernen Kreislaufwirtschaftsprinzipien.</p>
+            <div class="flex-center" style="gap: var(--spacing-sm); flex-wrap: wrap; justify-content: center;">
+                <a href="#bauphasen" class="btn btn-primary">Bauphasen erkunden</a>
+                <a href="#anleitung" class="btn btn-secondary">Bauanleitung</a>
+            </div>
+        </div>
+    </section>
 
-    <footer class="text-center py-8 text-gray-500">
-        <p>&copy; 2023 ZeppBamboo-Projekt. Alle Rechte vorbehalten.</p>
+    <!-- Vision Details -->
+    <section class="section" id="vision-details">
+        <div class="container">
+            <div class="grid grid-cols-2" style="align-items: center;">
+                <div>
+                    <h2>Die ZeppBamboo-Vision</h2>
+                    <p>Die ZeppBamboo-Vision ist eine Antwort auf die globale Ressourcenknappheit und das Problem des steigenden Meeresspiegels. Sie bietet ein Modell, das nicht nur überleben, sondern auch gedeihen kann.</p>
+                    
+                    <h3>Kernprinzipien</h3>
+                    <div class="grid" style="gap: var(--spacing-sm);">
+                        <div class="card">
+                            <h4>🌱 Einfachheit & Zugänglichkeit</h4>
+                            <p>Durch die Verwendung von schnell nachwachsendem Bambus und recycelten Materialien sind die Bauten kostengünstig und können von der Gemeinschaft selbst errichtet werden.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🔄 Ganzheitliche Integration</h4>
+                            <p>Jedes Element der Siedlung ist miteinander verbunden und bildet ein geschlossenes, sich selbst erhaltendes System.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="zeppbamboo_vision.jpeg" alt="ZeppBamboo Vision" style="max-width: 100%; height: auto; border-radius: var(--border-radius);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Building Phases -->
+    <section class="section" id="bauphasen" style="background: var(--color-background);">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: var(--spacing-2xl);">
+                <h2>Die Bauphasen</h2>
+                <p>Die Umsetzung der ZeppBamboo-Vision erfolgt in aufeinander aufbauenden Phasen, die den organischen Aufbau einer Gemeinschaft von Grund auf ermöglichen.</p>
+            </div>
+            <div class="grid grid-auto-fit" id="phases-grid">
+                <!-- Phases will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Guide -->
+    <section class="section" id="anleitung">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: var(--spacing-2xl);">
+                <h2>Technische Anleitung</h2>
+                <p>Schritt-für-Schritt Bauanleitung für eine schwimmende ZeppBamboo-Einheit mit lokalen Materialien und Low-Tech-Bauweisen.</p>
+            </div>
+            
+            <div class="grid" style="gap: var(--spacing-lg);">
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 1: Bau des schwimmenden Fundaments</h3>
+                    </div>
+                    <div class="guide-content">
+                        <h4>Materialien sammeln:</h4>
+                        <ul class="guide-list">
+                            <li>Robuste Bambusstangen (Rahmen)</li>
+                            <li>Recycelte Plastikkanister oder Fässer (Auftriebskörper)</li>
+                            <li>Seile, Draht oder recycelte Kunststoffstreifen (Verbindungen)</li>
+                        </ul>
+                        
+                        <h4>Bauschritt:</h4>
+                        <ul class="guide-list">
+                            <li>Bambusstangen rechteckig/quadratisch auslegen</li>
+                            <li>Ecken und Querstreben mit Seil/Draht fest verschnüren</li>
+                            <li>Leere, fest verschlossene Kanister gleichmäßig im Rahmen positionieren</li>
+                            <li>Kanister sicher mit Seil/Draht an den Bambusstangen befestigen</li>
+                            <li>Floss auf Stabilität prüfen und vorsichtig ins Wasser schieben</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 2: Aufbau der Grundstruktur</h3>
+                    </div>
+                    <div class="guide-content">
+                        <ul class="guide-list">
+                            <li>Vertikale Bambusstangen an Ecken und Mittelpositionen befestigen</li>
+                            <li>Bambus- oder Holzbretter als Boden verlegen und sicher befestigen</li>
+                            <li>Horizontale Bambusstangen zwischen vertikalen Stützen verbinden</li>
+                            <li>Platz für Fenster/Türen lassen</li>
+                            <li>Schräges Dachgerüst aus Bambus konstruieren</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 3: Dach- und Wandverkleidung</h3>
+                    </div>
+                    <div class="guide-content">
+                        <ul class="guide-list">
+                            <li>Schilf- oder Strohmatten auf das Dachgerüst legen und festbinden</li>
+                            <li>Lehm mit Stroh und Wasser mischen</li>
+                            <li>Masse auf Wandgerüst verteilen und in der Sonne trocknen lassen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 4: Autarke Systeme für Wasser & Energie</h3>
+                    </div>
+                    <div class="guide-content">
+                        <h4>Regenwassersammlung:</h4>
+                        <ul class="guide-list">
+                            <li>Dachrinnen anbringen, Wasser in großen Tank leiten</li>
+                            <li>Zweiten Behälter mit Sand, Kies, Aktivkohle füllen</li>
+                            <li>Wasser aus Sammeltank durch Filter leiten</li>
+                        </ul>
+                        
+                        <h4>Solarstrom:</h4>
+                        <ul class="guide-list">
+                            <li>Photovoltaikanlage auf Dach montieren</li>
+                            <li>Mit Batterie für Licht/Geräte verbinden</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 5: Anlegestelle und Vernetzung</h3>
+                    </div>
+                    <div class="guide-content">
+                        <ul class="guide-list">
+                            <li>Kleines Floss aus Bambus/Holz als Anlegestelle bauen</li>
+                            <li>Mit flexiblen Seilen an Hauptstruktur befestigen</li>
+                            <li>Flexible Stege/Brücken aus Bambus für spätere Vernetzung vorsehen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <div class="guide-header">
+                        <h3>Phase 6: Soziale und ökologische Integration</h3>
+                    </div>
+                    <div class="guide-content">
+                        <h4>Aquaponik:</h4>
+                        <ul class="guide-list">
+                            <li>Fischbecken und Pflanzbeete installieren</li>
+                            <li>Nährstoffreiches Wasser der Fische für Pflanzen nutzen</li>
+                        </ul>
+                        
+                        <h4>Grünflächen:</h4>
+                        <ul class="guide-list">
+                            <li>Einheimische Kräuter, Gemüse und Pflanzen in Behältern pflanzen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modular Floorplan -->
+    <section class="section" id="grundriss" style="background: var(--color-background);">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: var(--spacing-2xl);">
+                <h2>Modularer Grundriss</h2>
+                <p>Der erwiterbare ZeppBamboo-Grundriss ermöglicht flexible Anpassung an lokale Bedürfnisse und schrittweise Expansion.</p>
+            </div>
+            
+            <div class="grid grid-cols-2" style="align-items: start;">
+                <div class="card">
+                    <h3>2D-Grundriss: Ausbaubares ZeppBamboo-Modul</h3>
+                    <div style="background: var(--color-background); padding: var(--spacing-lg); border-radius: var(--border-radius); margin: var(--spacing-sm) 0;">
+                        <!-- Simple ASCII art representation of floorplan -->
+                        <pre style="font-family: monospace; line-height: 1.2; font-size: 0.8rem;">
+┌─────────────────────────┐
+│  ○   Aquaponik   ○     │
+│                        │
+│ ○  ┌─────────────┐  ○  │
+│    │             │     │
+│    │   Wohnen/   │     │
+│ ○  │ Gemeinschaft│  ○  │
+│    │             │     │
+│    └─────────────┘     │
+│                        │
+│  ○  Wasserspeicher  ○  │
+└─────────────────────────┘
+        </pre>
+                    </div>
+                    
+                    <h4>Legende:</h4>
+                    <ul class="guide-list">
+                        <li>○ = Auftriebskörper (Plastikkanister)</li>
+                        <li>┌─┐ = Feste Wand / Kernmodul</li>
+                        <li>Äußerer Rahmen = Plattformbegrenzung</li>
+                        <li>Gestrichelte Linien = Erweiterungsmöglichkeiten</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Bildaufbau-Elemente</h3>
+                    
+                    <h4>1. Kernmodul (Wohn-/Gemeinschaftsraum)</h4>
+                    <p>Im Zentrum ein kleineres Rechteck mit parallelen Linien für Wandstärke. Beschriftung: "Wohnen / Gemeinschaft".</p>
+                    
+                    <h4>2. Plattformbereich (offen)</h4>
+                    <p>Zwischenraum zwischen äußerem Rahmen und Kernmodul als Veranda, Nutzfläche, Aufenthaltsbereich.</p>
+                    
+                    <h4>3. Auftriebskörper</h4>
+                    <p>Kleine, gleichmäßig verteilte farbige Kreise oder Quadrate - recycelte Plastikkanister für Auftrieb.</p>
+                    
+                    <h4>4. Integrierte Systeme</h4>
+                    <ul class="guide-list">
+                        <li>Aquaponik-Beete: Grüne Rechtecke/Felder auf der Plattform</li>
+                        <li>Wasserspeicher/Filter: Großer blauer Kreis/Rechteck</li>
+                        <li>Regenwassersystem: Pfeillinie vom Dach zum Wasserspeicher</li>
+                    </ul>
+                    
+                    <h4>5. Modulare Anschlusspunkte</h4>
+                    <p>Gestrichelte Linien nach außen für Verbindungsoptionen zu weiteren Modulen oder Brücken.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section" id="gemeinschaft">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: var(--spacing-2xl);">
+                <h2>ZeppBamboo Gemeinschaft</h2>
+                <p>Eine Bewegung für nachhaltiges Leben und dezentrale Selbstversorgung.</p>
+            </div>
+            
+            <div class="grid grid-cols-3">
+                <div class="card text-center">
+                    <h3>🌍 Global</h3>
+                    <p>Die ZeppBamboo-Vision kann in verschiedenen klimatischen Bedingungen und Kulturen angepasst werden.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <h3>🤝 Gemeinschaftlich</h3>
+                    <p>Echodemokratische Strukturen ermöglichen kollektive Entscheidungsfindung und gemeinsame Verantwortung.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <h3>🔄 Nachhaltig</h3>
+                    <p>Kreislaufwirtschaft, Aquaponik und erneuerbare Energien schaffen ein sich selbst erhaltendes System.</p>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: var(--spacing-2xl);">
+                <h3>Werde Teil der Bewegung</h3>
+                <p>Ob als Bauender, Forscher oder Interessierter - die ZeppBamboo-Gemeinschaft freut sich über jeden Beitrag.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section" style="background: var(--color-primary); color: var(--color-white); text-align: center;">
+        <div class="container">
+            <h3>ZeppBamboo Community</h3>
+            <p>Nachhaltige schwimmende Siedlungen für eine bessere Zukunft</p>
+            <p style="margin-top: var(--spacing-lg); color: rgba(255, 255, 255, 0.8);">
+                &copy; 2023 ZeppBamboo-Projekt. Entwickelt mit ❤️ für nachhaltige Gemeinschaften.
+            </p>
+        </div>
     </footer>
+
+    <!-- Scroll to top button -->
+    <button id="scroll-to-top" onclick="scrollToTop()" 
+            style="position: fixed; bottom: 20px; right: 20px; background: var(--color-primary); color: var(--color-white); border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.2rem; cursor: pointer; display: none; z-index: 1000; box-shadow: var(--shadow);"
+            aria-label="Nach oben scrollen">
+        ↑
+    </button>
 
 </body>
 </html>
