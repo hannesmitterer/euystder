@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZeppBamboo: Bauphasen im Sudan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="languages.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
@@ -37,6 +38,27 @@
         .phase-card.animate-in {
             animation: fadeIn 0.8s ease-out forwards;
         }
+        
+        /* Language Navigator Styles */
+        .language-navigator {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .lang-option:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .language-display {
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     </style>
     <!-- Firebase SDKs laden -->
     <script type="module">
@@ -56,6 +78,56 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
+        
+        // Initialize Language Navigator
+        let languageNavigator;
+        
+        function initializeLanguageNavigator() {
+            languageNavigator = new LanguageNavigator('language-navigation', {
+                defaultLanguage: 'de', // Current app is in German
+                onLanguageChange: (language) => {
+                    console.log('Language changed to:', language);
+                    // Here you could implement actual language switching logic
+                    // For now, we'll just log the change and potentially update the UI
+                    updatePageLanguage(language);
+                }
+            });
+        }
+        
+        /**
+         * Update page language and content
+         * This is a placeholder for actual internationalization
+         */
+        function updatePageLanguage(language) {
+            // Update the html lang attribute
+            document.documentElement.lang = language.code;
+            
+            // Update text direction for RTL languages
+            document.documentElement.dir = language.rtl ? 'rtl' : 'ltr';
+            
+            // Show language change notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <span>Language changed to: <strong>${language.name}</strong></span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-white hover:text-gray-200">×</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Auto-remove notification after 3 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+        
+        // Initialize Firebase (variables already declared above)
+        // const app = initializeApp(firebaseConfig);
+        // const db = getFirestore(app);
+        // const auth = getAuth(app);
 
         // Sign in anonymously or with custom token
         if (initialAuthToken) {
@@ -73,6 +145,9 @@
                 const userId = user.uid;
                 document.getElementById('user-id').textContent = userId;
                 document.getElementById('loading').style.display = 'none';
+                
+                // Initialize Language Navigator after auth is ready
+                initializeLanguageNavigator();
 
                 const docRef = doc(db, `artifacts/${appId}/public/data/zeppBamboo`);
 
@@ -218,6 +293,11 @@
             Speichern und Teilen
         </button>
     </header>
+
+    <!-- Language Navigation Component -->
+    <div class="max-w-4xl mx-auto mb-8">
+        <div id="language-navigation"></div>
+    </div>
 
     <main id="main-content" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <p id="loading" class="text-center text-lg text-gray-500 col-span-full">Lade Inhalt...</p>

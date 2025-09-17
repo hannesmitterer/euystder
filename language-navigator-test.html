@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Navigator Tests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="languages.js"></script>
+    <style>
+        .test-result {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+        }
+        .test-pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .test-fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body class="p-8 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Language Navigator Component Tests</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">Language Navigator Demo</h2>
+            <div id="language-nav-demo"></div>
+            <div class="mt-4 p-4 bg-gray-100 rounded">
+                <h3 class="font-bold mb-2">Current Selection:</h3>
+                <div id="current-selection">No language selected</div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-4">Test Results</h2>
+            <div id="test-results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test suite for Language Navigator
+        class LanguageNavigatorTests {
+            constructor() {
+                this.tests = [];
+                this.navigator = null;
+            }
+            
+            /**
+             * Run all tests
+             */
+            runTests() {
+                console.log('Running Language Navigator Tests...');
+                
+                // Initialize the component first
+                this.initializeNavigator();
+                
+                // Run tests
+                this.testLanguageOrdering();
+                this.testNavigationMethods();
+                this.testLanguageSelection();
+                this.testSearchFunctionality();
+                this.testRTLSupport();
+                this.testStaticMethods();
+                
+                // Display results
+                this.displayResults();
+            }
+            
+            /**
+             * Initialize the navigator for testing
+             */
+            initializeNavigator() {
+                const navigator = new LanguageNavigator('language-nav-demo', {
+                    defaultLanguage: 'de',
+                    onLanguageChange: (language) => {
+                        document.getElementById('current-selection').innerHTML = `
+                            <strong>Code:</strong> ${language.code}<br>
+                            <strong>Native Name:</strong> ${language.name}<br>
+                            <strong>English Name:</strong> ${language.englishName}<br>
+                            <strong>RTL:</strong> ${language.rtl ? 'Yes' : 'No'}
+                        `;
+                    }
+                });
+                this.navigator = navigator;
+            }
+            
+            /**
+             * Test that languages are in correct canonical order
+             */
+            testLanguageOrdering() {
+                const languages = LanguageNavigator.getSupportedLanguages();
+                
+                // Test 1: Languages should be in alphabetical order by English name
+                const expectedOrder = ['Afrikaans', 'Albanian', 'Amharic', 'Arabic', 'Armenian'];
+                const actualOrder = languages.slice(0, 5).map(lang => lang.englishName);
+                this.addTest('Languages in correct alphabetical order', 
+                    JSON.stringify(expectedOrder) === JSON.stringify(actualOrder),
+                    `Expected: ${expectedOrder.join(', ')}, Got: ${actualOrder.join(', ')}`);
+                
+                // Test 2: Should have minimum expected number of languages
+                this.addTest('Has minimum 90 Google-supported languages', 
+                    languages.length >= 90,
+                    `Found ${languages.length} languages`);
+                
+                // Test 3: Should include major languages
+                const majorLanguages = ['en', 'es', 'fr', 'de', 'zh', 'ja', 'ar', 'hi', 'ru'];
+                const hasAllMajor = majorLanguages.every(code => 
+                    languages.some(lang => lang.code === code)
+                );
+                this.addTest('Includes all major languages', hasAllMajor,
+                    `Checked: ${majorLanguages.join(', ')}`);
+            }
+            
+            /**
+             * Test navigation methods
+             */
+            testNavigationMethods() {
+                const initialIndex = this.navigator.currentIndex;
+                const initialLang = this.navigator.getCurrentLanguage();
+                
+                // Test next navigation
+                this.navigator.nextLanguage();
+                const nextIndex = this.navigator.currentIndex;
+                this.addTest('Next navigation works', 
+                    nextIndex === (initialIndex + 1) % this.navigator.languages.length,
+                    `Initial: ${initialIndex}, Next: ${nextIndex}`);
+                
+                // Test previous navigation
+                this.navigator.previousLanguage();
+                const backIndex = this.navigator.currentIndex;
+                this.addTest('Previous navigation works', 
+                    backIndex === initialIndex,
+                    `Back to initial: ${backIndex}, Expected: ${initialIndex}`);
+                
+                // Test wrap-around for next
+                this.navigator.currentIndex = this.navigator.languages.length - 1;
+                this.navigator.nextLanguage();
+                this.addTest('Next navigation wraps around', 
+                    this.navigator.currentIndex === 0,
+                    `Wrapped to index: ${this.navigator.currentIndex}`);
+                
+                // Test wrap-around for previous
+                this.navigator.currentIndex = 0;
+                this.navigator.previousLanguage();
+                this.addTest('Previous navigation wraps around', 
+                    this.navigator.currentIndex === this.navigator.languages.length - 1,
+                    `Wrapped to index: ${this.navigator.currentIndex}`);
+                
+                // Reset to initial state
+                this.navigator.currentIndex = initialIndex;
+            }
+            
+            /**
+             * Test language selection by code
+             */
+            testLanguageSelection() {
+                // Test setting valid language
+                const success = this.navigator.setLanguage('fr');
+                this.addTest('Can set language by valid code', success,
+                    `Setting French: ${success}`);
+                
+                const currentLang = this.navigator.getCurrentLanguage();
+                this.addTest('Language correctly set to French', 
+                    currentLang.code === 'fr' && currentLang.englishName === 'French',
+                    `Current: ${currentLang.code} (${currentLang.englishName})`);
+                
+                // Test setting invalid language
+                const invalidSuccess = this.navigator.setLanguage('invalid');
+                this.addTest('Handles invalid language code gracefully', 
+                    !invalidSuccess,
+                    `Invalid code handling: ${!invalidSuccess ? 'Correctly rejected' : 'Incorrectly accepted'}`);
+            }
+            
+            /**
+             * Test search functionality
+             */
+            testSearchFunctionality() {
+                // Test finding language by name
+                const languages = LanguageNavigator.getSupportedLanguages();
+                const englishLangs = languages.filter(lang => 
+                    lang.name.toLowerCase().includes('english') ||
+                    lang.englishName.toLowerCase().includes('english')
+                );
+                this.addTest('Search can find English', 
+                    englishLangs.length > 0,
+                    `Found ${englishLangs.length} matches for "English"`);
+                
+                // Test finding language by code
+                const germanByCode = languages.filter(lang => 
+                    lang.code.toLowerCase().includes('de')
+                );
+                this.addTest('Search can find language by code', 
+                    germanByCode.length > 0,
+                    `Found ${germanByCode.length} matches for "de"`);
+            }
+            
+            /**
+             * Test RTL (Right-to-Left) language support
+             */
+            testRTLSupport() {
+                const languages = LanguageNavigator.getSupportedLanguages();
+                const rtlLanguages = languages.filter(lang => lang.rtl);
+                
+                this.addTest('Has RTL language support', 
+                    rtlLanguages.length > 0,
+                    `Found ${rtlLanguages.length} RTL languages`);
+                
+                // Test specific RTL languages
+                const arabicLang = languages.find(lang => lang.code === 'ar');
+                this.addTest('Arabic is marked as RTL', 
+                    arabicLang && arabicLang.rtl,
+                    `Arabic RTL: ${arabicLang ? arabicLang.rtl : 'not found'}`);
+                
+                const hebrewLang = languages.find(lang => lang.code === 'iw');
+                this.addTest('Hebrew is marked as RTL', 
+                    hebrewLang && hebrewLang.rtl,
+                    `Hebrew RTL: ${hebrewLang ? hebrewLang.rtl : 'not found'}`);
+            }
+            
+            /**
+             * Test static methods
+             */
+            testStaticMethods() {
+                // Test getSupportedLanguages
+                const allLanguages = LanguageNavigator.getSupportedLanguages();
+                this.addTest('Static getSupportedLanguages works', 
+                    Array.isArray(allLanguages) && allLanguages.length > 0,
+                    `Returned ${allLanguages.length} languages`);
+                
+                // Test getLanguageByCode
+                const englishLang = LanguageNavigator.getLanguageByCode('en');
+                this.addTest('Static getLanguageByCode works', 
+                    englishLang && englishLang.code === 'en' && englishLang.englishName === 'English',
+                    `Found: ${englishLang ? englishLang.englishName : 'null'}`);
+                
+                // Test getLanguageByCode with invalid code
+                const invalidLang = LanguageNavigator.getLanguageByCode('invalid');
+                this.addTest('Static getLanguageByCode handles invalid code', 
+                    invalidLang === undefined,
+                    `Invalid code result: ${invalidLang}`);
+            }
+            
+            /**
+             * Add a test result
+             */
+            addTest(name, passed, details) {
+                this.tests.push({ name, passed, details });
+            }
+            
+            /**
+             * Display test results
+             */
+            displayResults() {
+                const resultsDiv = document.getElementById('test-results');
+                const passedTests = this.tests.filter(test => test.passed).length;
+                const totalTests = this.tests.length;
+                
+                resultsDiv.innerHTML = `
+                    <div class="mb-4 p-4 rounded ${passedTests === totalTests ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                        <strong>Test Summary: ${passedTests}/${totalTests} tests passed</strong>
+                    </div>
+                    ${this.tests.map(test => `
+                        <div class="test-result ${test.passed ? 'test-pass' : 'test-fail'}">
+                            <strong>${test.passed ? '✓' : '✗'} ${test.name}</strong>
+                            ${test.details ? `<br><small>${test.details}</small>` : ''}
+                        </div>
+                    `).join('')}
+                `;
+                
+                console.log(`Tests completed: ${passedTests}/${totalTests} passed`);
+            }
+        }
+        
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const testSuite = new LanguageNavigatorTests();
+            testSuite.runTests();
+        });
+    </script>
+</body>
+</html>
